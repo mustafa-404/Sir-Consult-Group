@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sir Consult | ERP & Financial Architecture With XTRA ERP </title>
+    <title>Sir Consult | ERP & Financial Architecture With XTRA ERP</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         /* Premium Tech Variables */
@@ -79,7 +79,7 @@
         .glass-card p { color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; }
 
         /* Videos Section */
-        .video-container { position: relative; padding-bottom: 56.25%; /* 16:9 aspect ratio */ height: 0; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .video-container iframe, .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
         /* Xtra ERP Showcase */
@@ -87,6 +87,27 @@
         .xtra-box::after { content: ''; position: absolute; right: -50px; top: -50px; width: 300px; height: 300px; background: var(--accent); filter: blur(150px); opacity: 0.15; pointer-events: none; }
         .xtra-list li { margin-bottom: 1.2rem; display: flex; align-items: center; gap: 1rem; color: var(--text-main); font-size: 1.1rem; }
         .xtra-list i { color: var(--accent); font-size: 1.3rem; }
+
+        /* Download Button */
+        .download-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.9rem 2.2rem;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #060b14;
+            font-weight: 800;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        .download-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.5);
+        }
 
         /* Portfolio */
         .filter-controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 4rem; }
@@ -118,11 +139,11 @@
         }
 
         /* ============================================
-           تحسين عرض الصور في المعرض (Gallery) - تم إضافته بواسطة المساعد
+           تحسين عرض الصور في المعرض (Gallery)
            ============================================ */
         .img-container { 
             width: 100%; 
-            height: 180px; /* يمكنك تعديل الارتفاع حسب رغبتك */
+            height: 180px;
             border-radius: 12px; 
             overflow: hidden; 
             border: 1px solid rgba(255,255,255,0.1); 
@@ -132,19 +153,18 @@
         .img-container img { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* قص الصورة بشكل متناسق دون تمدد */
+            object-fit: cover;
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: block;
         }
         .img-container:hover img { 
-            transform: scale(1.08); /* تكبير خفيف عند المرور */
+            transform: scale(1.08);
         }
         .img-container:hover {
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
             border-color: var(--accent);
         }
 
-        /* بطاقات المعرض (Cards) */
         .gallery-card {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 16px;
@@ -160,7 +180,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
         .gallery-card .img-container {
-            height: 150px; /* ارتفاع الصورة داخل البطاقة */
+            height: 150px;
             border-radius: 10px;
         }
         .gallery-card h4 {
@@ -178,7 +198,6 @@
             padding: 0 4px;
         }
 
-        /* تنسيق إضافي للصور في بطاقات الحلول الأخرى (مثل المستشفيات) */
         .solution-img .img-container {
             height: 200px;
             margin-top: 15px;
@@ -220,7 +239,6 @@
    <!-- Hero Section -->
     <section class="hero">
         <div>
-            <!-- UPDATED HERE: Highlighted "Exclusive Agent for Xtra" -->
             <p style="color: var(--gold); font-weight: 800; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase;" class="lang" data-en="Exclusive Agent for Xtra in Egypt" data-ar="الوكيل الحصري لبرنامج أكسترا في مصر">Exclusive Agent for Xtra in Egypt</p>
             <h1 class="lang" data-en="Intelligent Integration of <br><span>Financial Systems</span> & Tech" data-ar="التكامل الذكي بين <br><span>الأنظمة المحاسبية</span> والتقنيات">Intelligent Integration of <br><span>Financial Systems</span> & Tech</h1>
             <p class="lang" data-en="Founded in 2021, we empower organizations to automate their financial and administrative operations with unprecedented scale and security." data-ar="تأسسنا عام 2021، ونهدف إلى تمكين المؤسسات من أتمتة عملياتها المالية والإدارية بمقاييس وأمان غير مسبوق.">Founded in 2021, we empower organizations to automate their financial and administrative operations with unprecedented scale and security.</p>
@@ -265,6 +283,13 @@
                     <li><i class="fas fa-chart-pie"></i> <span class="lang" data-en="Advanced BI Reports & AI Analytics" data-ar="تصميم تقارير BI وحلول ذكاء اصطناعي">Advanced BI Reports & AI Analytics</span></li>
                     <li><i class="fas fa-folder-open"></i> <span class="lang" data-en="Document Cycles & Financial Consulting" data-ar="إعداد الدورات المستندية واستشارات مالية">Document Cycles & Financial Consulting</span></li>
                 </ul>
+
+                <!-- زر تحميل برنامج أكسترا -->
+                <a href="#" class="download-btn" onclick="alert('سيتم توجيهك لتحميل برنامج أكسترا المحاسبي. الرابط التجريبي: https://example.com/xtra-setup.exe'); return false;">
+                    <i class="fas fa-download" style="margin-left: 10px;"></i> 
+                    <span class="lang" data-en="Download Xtra Accounting" data-ar="تحميل برنامج أكسترا المحاسبي">Download Xtra Accounting</span>
+                </a>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.8rem;" class="lang" data-en="* Demo version for testing purposes. Contact us for full licensed version." data-ar="* نسخة تجريبية لأغراض الاختبار. تواصل معنا للحصول على النسخة الكاملة.">* Demo version for testing purposes. Contact us for full licensed version.</p>
             </div>
             
             <div style="background: rgba(2, 6, 23, 0.5); border-radius: 24px; padding: 3rem; display: flex; justify-content: center; align-items: center; border: 1px solid rgba(255,255,255,0.05); height: 100%; box-shadow: inset 0 0 50px rgba(0,0,0,0.5);">
@@ -292,7 +317,7 @@
                    نقاط بيع (POS) ونظام مخازن متصل مباشرة ببرنامج أكسترا. إعداد الدورات المستندية لتتبع الوصفات، متابعة إيرادات الفروع، والتكامل الفوري مع منظومة الإيصال الإلكتروني للضرائب.
                 </p>
 
-                <!-- معرض بطاقات المطاعم (مستخدم الكلاسات الجديدة) -->
+                <!-- Gallery Cards -->
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px;">
                     
                     <div class="gallery-card">
@@ -363,7 +388,6 @@
                    data-ar="بنية مالية قوية للرعاية الصحية. بدءاً من فواتير المرضى ومخازن الصيدليات إلى تقارير BI تحلل أرباح الأقسام. نقوم بتخصيص قواعد البيانات للتعامل مع العمليات الكثيفة بأمان تام.">
                    Robust financial architecture built for healthcare. From patient billing and pharmacy inventory to deep BI reports analyzing department profitability. We customize databases to handle high-volume transactions securely.
                 </p>
-                <!-- مثال لاستخدام .img-container في قسم المستشفيات -->
                 <div class="solution-img">
                     <div class="img-container">
                         <img src="hospital-app.jpg" alt="Hospital Dashboard" onerror="this.src='https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800'">
@@ -414,7 +438,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Dynamics -->
+    <!-- JavaScript -->
     <script>
         let isArabic = false;
         
@@ -501,16 +525,27 @@
             if (isArabic) {
                 document.body.classList.add('rtl');
                 toggleBtn.innerText = 'English';
-                elements.forEach(el => el.innerText = el.getAttribute('data-ar'));
+                elements.forEach(el => {
+                    const arText = el.getAttribute('data-ar');
+                    if (arText) el.innerHTML = arText;
+                });
             } else {
                 document.body.classList.remove('rtl');
                 toggleBtn.innerText = 'العربية';
-                elements.forEach(el => el.innerText = el.getAttribute('data-en'));
+                elements.forEach(el => {
+                    const enText = el.getAttribute('data-en');
+                    if (enText) el.innerHTML = enText;
+                });
             }
             
             const activeFilterBtn = document.querySelector('.filter-btn.active');
-            const currentFilter = activeFilterBtn.getAttribute('onclick').match(/'([^']+)'/)[1];
-            renderClients(currentFilter);
+            if (activeFilterBtn) {
+                const onclickAttr = activeFilterBtn.getAttribute('onclick');
+                if (onclickAttr) {
+                    const match = onclickAttr.match(/'([^']+)'/);
+                    if (match) renderClients(match[1]);
+                }
+            }
         }
 
         renderClients('all');
