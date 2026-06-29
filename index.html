@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sir Consult | ERP & Financial Architecture With XTRA ERP </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Premium Tech Variables */
+        :root {
+            --bg-dark: #060b14;
+            --bg-card: rgba(27, 15, 42, 0.6);
+            --primary-glow: #3b82f6;
+            --accent: #0ea5e9;
+            --gold: #fbbf24;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark); color: var(--text-main);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.15), transparent 25%);
+            background-attachment: fixed; transition: all 0.3s ease;
+        }
+
+        body.rtl { direction: rtl; text-align: right; }
+        body.rtl .nav-links { flex-direction: row-reverse; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Header */
+        header { background: rgba(6, 11, 20, 0.85); backdrop-filter: blur(15px); position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0.8rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--text-main); text-decoration: none; font-weight: 500; transition: 0.3s; cursor: pointer; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--accent); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .lang-btn { background: transparent; color: white; border: 1px solid var(--accent); padding: 0.4rem 1.2rem; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
+        .lang-btn:hover { background: var(--accent); box-shadow: 0 0 15px rgba(14, 165, 233, 0.5); }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 2rem; position: relative; }
+        .hero h1 { font-size: 4rem; margin-bottom: 1.5rem; font-weight: 900; line-height: 1.1; letter-spacing: -1px; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .hero h1 span { background: linear-gradient(to right, #60a5fa, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 2.5rem; line-height: 1.8; }
+        
+        .btn-glow { padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.1rem; background: linear-gradient(135deg, #2563eb, #0ea5e9); color: white; border: none; cursor: pointer; box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; }
+        .btn-glow:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.6); }
+
+        /* Stats */
+        .stats-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1200px; margin: -50px auto 4rem; padding: 2rem; background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; text-align: center; position: relative; z-index: 10; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+        .stat-item h2 { font-size: 3.5rem; background: linear-gradient(to right, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; font-weight: 900; }
+        .stat-item p { color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
+
+        /* Layouts */
+        section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.8rem; margin-bottom: 4rem; color: white; font-weight: 800; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: stretch; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
+        /* Glass Cards */
+        .glass-card { background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.4)); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; padding: 3rem; transition: all 0.4s ease; height: 100%; position: relative; overflow: hidden; }
+        .glass-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary-glow), var(--accent)); transform: scaleX(0); transition: transform 0.4s ease; transform-origin: left; }
+        .glass-card:hover { transform: translateY(-10px); border-color: rgba(255,255,255,0.15); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .glass-card:hover::before { transform: scaleX(1); }
+        
+        .card-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; display: inline-block; animation: float 6s ease-in-out infinite; }
+        .glass-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: white; }
+        .glass-card p { color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; }
+
+        /* Videos Section */
+        .video-container { position: relative; padding-bottom: 56.25%; /* 16:9 aspect ratio */ height: 0; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .video-container iframe, .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* Xtra ERP Showcase */
+        .xtra-box { background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(2, 6, 23, 0.9) 100%); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 30px; padding: 4rem; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; box-shadow: 0 30px 60px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
+        .xtra-box::after { content: ''; position: absolute; right: -50px; top: -50px; width: 300px; height: 300px; background: var(--accent); filter: blur(150px); opacity: 0.15; pointer-events: none; }
+        .xtra-list li { margin-bottom: 1.2rem; display: flex; align-items: center; gap: 1rem; color: var(--text-main); font-size: 1.1rem; }
+        .xtra-list i { color: var(--accent); font-size: 1.3rem; }
+
+        /* Portfolio */
+        .filter-controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 4rem; }
+        .filter-btn { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 0.8rem 1.8rem; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; font-weight: 600; letter-spacing: 0.5px; }
+        .filter-btn:hover, .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; box-shadow: 0 5px 15px rgba(14, 165, 233, 0.4); transform: translateY(-2px); }
+
+        .clients-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; perspective: 1000px; }
+        .client-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 2.5rem 2rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
+        .client-card:hover { transform: translateY(-10px) rotateX(2deg) scale(1.02); border-color: var(--accent); box-shadow: 0 15px 35px rgba(14, 165, 233, 0.15); background: rgba(30, 41, 59, 0.8); }
+        .client-category { font-size: 0.75rem; color: var(--bg-dark); background: var(--accent); padding: 0.3rem 0.8rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.5rem; display: inline-block; font-weight: bold; }
+        .client-name { font-size: 1.4rem; color: white; margin-bottom: 1rem; font-weight: 800; line-height: 1.3; }
+        .client-work { color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: flex-start; gap: 0.8rem; line-height: 1.5; }
+        .client-work i { color: #10b981; margin-top: 0.3rem; }
+
+        /* Footer */
+        footer { background: #020617; padding: 5rem 2rem 3rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .contact-info p { margin-bottom: 1.2rem; color: var(--text-muted); display: flex; align-items: center; gap: 15px; font-size: 1.1rem; }
+        .contact-info i { color: var(--accent); width: 24px; text-align: center; font-size: 1.2rem; }
+
+        @media (max-width: 900px) {
+            .grid-2, .xtra-box, .footer-content { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3rem; }
+            .xtra-box { padding: 2.5rem; }
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" style="text-decoration: none; display: flex; align-items: center; width: 220px; height: 50px;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150" width="100%" height="100%">
+                    <defs>
+                        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fbbf24" />
+                            <stop offset="50%" stop-color="#f59e0b" />
+                            <stop offset="100%" stop-color="#b45309" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="75" cy="75" r="55" fill="#0f172a" stroke="url(#goldGrad)" stroke-width="4"/>
+                    <text x="75" y="90" font-family="'Segoe UI', system-ui, sans-serif" font-size="42" font-weight="900" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="-2">SC</text>
+                    <text x="150" y="85" font-family="'Segoe UI', system-ui, sans-serif" font-size="44" font-weight="800" fill="#ffffff" letter-spacing="1">Sir <tspan fill="#0ea5e9">Consult</tspan></text>
+                    <text x="155" y="115" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="600" fill="#94a3b8" letter-spacing="3">ERP &amp; FINANCIAL ARCHITECTURE</text>
+                </svg>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#about" class="lang" data-en="Who We Are" data-ar="من نحن">Who We Are</a></li>
+                <li><a href="#videos" class="lang" data-en="Videos" data-ar="الفيديوهات">Videos</a></li>
+                <li><a href="#solutions" class="lang" data-en="Solutions" data-ar="حلولنا">Solutions</a></li>
+                <li><a href="#xtra" class="lang" data-en="Xtra ERP" data-ar="أكسترا ERP">Xtra ERP</a></li>
+                <li><a href="#portfolio" class="lang" data-en="Our Clients" data-ar="عملاؤنا">Our Clients</a></li>
+                <li><button onclick="toggleLanguage()" class="lang-btn" id="langToggle">العربية</button></li>
+            </ul>
+        </div>
+    </header>
+
+   <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <!-- UPDATED HERE: Highlighted "Exclusive Agent for Xtra" -->
+            <p style="color: var(--gold); font-weight: 800; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase;" class="lang" data-en="Exclusive Agent for Xtra in Egypt" data-ar="الوكيل الحصري لبرنامج أكسترا في مصر">Exclusive Agent for Xtra in Egypt</p>
+            <h1 class="lang" data-en="Intelligent Integration of <br><span>Financial Systems</span> & Tech" data-ar="التكامل الذكي بين <br><span>الأنظمة المحاسبية</span> والتقنيات">Intelligent Integration of <br><span>Financial Systems</span> & Tech</h1>
+            <p class="lang" data-en="Founded in 2021, we empower organizations to automate their financial and administrative operations with unprecedented scale and security." data-ar="تأسسنا عام 2021، ونهدف إلى تمكين المؤسسات من أتمتة عملياتها المالية والإدارية بمقاييس وأمان غير مسبوق.">Founded in 2021, we empower organizations to automate their financial and administrative operations with unprecedented scale and security.</p>
+            <a href="#portfolio" class="btn-glow lang" data-en="View Our Portfolio" data-ar="شاهد سابقة أعمالنا">View Our Portfolio</a>
+        </div>
+    </section>
+
+    <!-- ... (Keep Statistics and About Section) ... -->
+
+    <!-- Xtra ERP Showcase -->
+    <section id="xtra">
+        <div class="xtra-box">
+            <div>
+                <!-- UPDATED HERE -->
+                <h2 style="font-size: 2.8rem; margin-bottom: 1rem; color: white; font-weight: 800;" class="lang" data-en="The Power of Xtra ERP" data-ar="قوة برنامج أكسترا">The Power of Xtra ERP</h2>
+                <p style="color: var(--gold); font-weight: 800; margin-bottom: 1.5rem; letter-spacing: 1.5px; display: inline-block; border: 1px solid var(--gold); padding: 0.3rem 1rem; border-radius: 20px;" class="lang" data-en="EXCLUSIVE AGENT FOR XTRA" data-ar="الوكيل الحصري لبرنامج أكسترا">EXCLUSIVE AGENT FOR XTRA</p>
+                <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; font-size: 1.1rem;" class="lang" data-en="As the exclusive agent for Xtra Accounting software in Egypt, we leverage its immense flexibility to deliver solutions tailored to every activity. Our vision integrates Xtra ERP with web portals, mobile apps, and AI-driven reporting." data-ar="بصفتنا الوكيل الحصري لبرنامج أكسترا للمحاسبة في مصر، نعتمد على مرونته الهائلة لتقديم حلول ملائمة لكل نشاط. رؤيتنا تشمل دمج أكسترا مع بوابات الويب، تطبيقات الموبايل، والذكاء الاصطناعي في التقارير.">As the exclusive agent for Xtra Accounting software in Egypt, we leverage its immense flexibility to deliver solutions tailored to every activity. Our vision integrates Xtra ERP with web portals, mobile apps, and AI-driven reporting.</p>
+                
+                <ul class="xtra-list" style="list-style: none;">
+                    <li><i class="fas fa-file-invoice-dollar"></i> <span class="lang" data-en="Seamless E-Invoicing & Tax Integration" data-ar="التكامل مع الفاتورة الإلكترونية ومنظومة الضرائب">Seamless E-Invoicing & Tax Integration</span></li>
+                    <li><i class="fas fa-chart-pie"></i> <span class="lang" data-en="Advanced BI Reports & AI Analytics" data-ar="تصميم تقارير BI وحلول ذكاء اصطناعي">Advanced BI Reports & AI Analytics</span></li>
+                    <li><i class="fas fa-folder-open"></i> <span class="lang" data-en="Document Cycles & Financial Consulting" data-ar="إعداد الدورات المستندية واستشارات مالية">Document Cycles & Financial Consulting</span></li>
+                </ul>
+            </div>
+            <!-- ... (Keep SVG Logo) ... -->
+        </div>
+    </section>
+
+    <!-- ... (Keep Industry Solutions, Portfolio, and Footer) ... -->
+    
+    <script>
+        // ... (Keep the existing JavaScript) ...
+    </script>
+
+    <!-- About & Features Section -->
+    <section id="about">
+        <h2 class="section-title lang" data-en="Why Sir Consult?" data-ar="لماذا سير كونسلت؟">Why Sir Consult?</h2>
+        <div class="grid-3">
+            <div class="glass-card">
+                <i class="fas fa-award card-icon"></i>
+                <h3 class="lang" data-en="5 Years of Excellence" data-ar="5 سنوات من التميز">5 Years of Excellence</h3>
+                <p class="lang" data-en="Founded in 2021 as a closed Egyptian joint-stock company, we bring half a decade of established success in implementing customized accounting solutions for the Egyptian market." data-ar="تأسست كشركة مساهمة مصرية مغلقة عام 2021، نقدم نصف عقد من النجاح الراسخ في تنفيذ الحلول المحاسبية المخصصة للسوق المصري.">Founded in 2021 as a closed Egyptian joint-stock company, we bring half a decade of established success in implementing customized accounting solutions for the Egyptian market.</p>
+            </div>
+            
+            <div class="glass-card">
+                <i class="fas fa-user-graduate card-icon"></i>
+                <h3 class="lang" data-en="Academic Leadership" data-ar="إدارة أكاديمية">Academic Leadership</h3>
+                <p class="lang" data-en="Managed by a team with strong academic backgrounds, including extensive research and doctorates, bridging the gap between theoretical finance and practical ERP implementation." data-ar="تدار بخلفية أكاديمية محاسبية تشمل أبحاث ودكتوراه، لسد الفجوة بين النظريات المالية والتطبيق العملي لأنظمة ERP.">Managed by a team with strong academic backgrounds, including extensive research and doctorates, bridging the gap between theoretical finance and practical ERP implementation.</p>
+            </div>
+
+            <div class="glass-card">
+                <i class="fas fa-handshake card-icon"></i>
+                <h3 class="lang" data-en="Free Consulting & Support" data-ar="استشارات ودعم مجاني">Free Consulting & Support</h3>
+                <p class="lang" data-en="We believe in continuous partnership. We provide free periodic updates, ongoing technical support, and free financial and administrative consulting without extra charges." data-ar="نؤمن بالشراكة المستمرة. نقدم تحديثات دورية مجانية، دعم فني مستمر، واستشارات مالية وإدارية بدون مقابل إضافي.">We believe in continuous partnership. We provide free periodic updates, ongoing technical support, and free financial and administrative consulting without extra charges.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW Videos Section -->
+    <section id="videos" style="background: rgba(15, 23, 42, 0.3); padding-top: 6rem; padding-bottom: 6rem; margin-top: 2rem;">
+        <h2 class="section-title lang" data-en="Watch Our Systems in Action" data-ar="شاهد أنظمتنا في العمل">Watch Our Systems in Action</h2>
+        <div class="grid-2">
+            
+            <!-- Video 1 -->
+            <div class="glass-card" style="padding: 1.5rem;">
+                <div class="video-container">
+                    <!-- Replace the src link below with your actual YouTube or Vimeo link -->
+                    <!-- Example: src="https://www.youtube.com/embed/YOUR_VIDEO_ID" -->
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Sir Consult System Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <h3 class="lang" style="margin-top: 1.5rem; text-align: center;" data-en="Xtra ERP Full Overview" data-ar="نظرة عامة على نظام أكسترا ERP">Xtra ERP Full Overview</h3>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="glass-card" style="padding: 1.5rem;">
+                <div class="video-container">
+                    <!-- Replace the src link below with your actual YouTube or Vimeo link -->
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Restaurant & POS System" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <h3 class="lang" style="margin-top: 1.5rem; text-align: center;" data-en="Restaurant & POS Operations" data-ar="نظام إدارة المطاعم ونقاط البيع">Restaurant & POS Operations</h3>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Xtra ERP Showcase -->
+    <section id="xtra">
+        <div class="xtra-box">
+            <div>
+                <h2 style="font-size: 2.8rem; margin-bottom: 1rem; color: white; font-weight: 800;" class="lang" data-en="The Power of Xtra ERP" data-ar="قوة برنامج أكسترا">The Power of Xtra ERP</h2>
+                <p style="color: var(--gold); font-weight: 800; margin-bottom: 1.5rem; letter-spacing: 1.5px; display: inline-block; border: 1px solid var(--gold); padding: 0.3rem 1rem; border-radius: 20px;" class="lang" data-en="EXCLUSIVE AGENT IN EGYPT" data-ar="الوكيل الحصري في مصر">EXCLUSIVE AGENT IN EGYPT</p>
+                <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; font-size: 1.1rem;" class="lang" data-en="As the exclusive agent for Xtra Accounting software in Egypt, we leverage its immense flexibility to deliver solutions tailored to every activity. Our vision integrates Xtra ERP with web portals, mobile apps, and AI-driven reporting." data-ar="بصفتنا الوكيل الحصري لبرنامج أكسترا للمحاسبة في مصر، نعتمد على مرونته الهائلة لتقديم حلول ملائمة لكل نشاط. رؤيتنا تشمل دمج أكسترا مع بوابات الويب، تطبيقات الموبايل، والذكاء الاصطناعي في التقارير.">As the exclusive agent for Xtra Accounting software in Egypt, we leverage its immense flexibility to deliver solutions tailored to every activity. Our vision integrates Xtra ERP with web portals, mobile apps, and AI-driven reporting.</p>
+                
+                <ul class="xtra-list" style="list-style: none;">
+                    <li><i class="fas fa-file-invoice-dollar"></i> <span class="lang" data-en="Seamless E-Invoicing & Tax Integration" data-ar="التكامل مع الفاتورة الإلكترونية ومنظومة الضرائب">Seamless E-Invoicing & Tax Integration</span></li>
+                    <li><i class="fas fa-chart-pie"></i> <span class="lang" data-en="Advanced BI Reports & AI Analytics" data-ar="تصميم تقارير BI وحلول ذكاء اصطناعي">Advanced BI Reports & AI Analytics</span></li>
+                    <li><i class="fas fa-folder-open"></i> <span class="lang" data-en="Document Cycles & Financial Consulting" data-ar="إعداد الدورات المستندية واستشارات مالية">Document Cycles & Financial Consulting</span></li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(2, 6, 23, 0.5); border-radius: 24px; padding: 3rem; display: flex; justify-content: center; align-items: center; border: 1px solid rgba(255,255,255,0.05); height: 100%; box-shadow: inset 0 0 50px rgba(0,0,0,0.5);">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 150" width="100%">
+                    <path d="M 60 90 L 110 30 L 140 60 L 90 120 Z" fill="#0ea5e9" opacity="0.9"/>
+                    <path d="M 340 90 L 290 30 L 260 60 L 310 120 Z" fill="#0ea5e9" opacity="0.9"/>
+                    <text x="50%" y="65%" font-family="'Segoe UI', Arial, sans-serif" font-size="85" font-weight="900" fill="#f8fafc" text-anchor="middle" font-style="italic" letter-spacing="-3">XTRA</text>
+                    <text x="50%" y="88%" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#0ea5e9" text-anchor="middle" letter-spacing="4">ADAPT AND SUCCEED</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industry Solutions -->
+    <section id="solutions">
+        <h2 class="section-title lang" data-en="Tailored Industry Solutions" data-ar="حلول مخصصة للقطاعات">Tailored Industry Solutions</h2>
+        <div class="grid-2">
+            <!-- Restaurant App -->
+            <div class="glass-card">
+                <i class="fas fa-utensils card-icon"></i>
+                <h3 class="lang" data-en="Restaurant Management System" data-ar="تطبيق إدارة المطاعم">Restaurant Management System</h3>
+                <p class="lang" 
+                   data-en="Dynamic Point-of-Sale (POS) and inventory modules seamlessly connected to Xtra ERP. We engineer custom document cycles to track recipes, calculate material waste, monitor multi-branch revenue, and instantly sync with the Egyptian tax e-receipt system." 
+                   data-ar="نقاط بيع (POS) ونظام مخازن متصل مباشرة ببرنامج أكسترا. نقوم بإعداد الدورات المستندية لتتبع الوصفات، حساب الهالك، متابعة إيرادات الفروع، والتكامل الفوري مع منظومة الإيصال الإلكتروني للضرائب.">
+                   Dynamic Point-of-Sale (POS) and inventory modules seamlessly connected to Xtra ERP. We engineer custom document cycles to track recipes, calculate material waste, monitor multi-branch revenue, and instantly sync with the Egyptian tax e-receipt system.
+                </p>
+                <div class="img-container">
+                    <img src="restaurant-app.jpg" alt="Restaurant POS" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800'">
+                </div>
+            </div>
+
+            <!-- Hospital App -->
+            <div class="glass-card">
+                <i class="fas fa-hospital card-icon"></i>
+                <h3 class="lang" data-en="Hospital & Healthcare ERP" data-ar="نظام إدارة المستشفيات">Hospital & Healthcare ERP</h3>
+                <p class="lang" 
+                   data-en="Robust financial architecture built for healthcare. From patient billing and pharmacy inventory to deep BI reports analyzing department profitability. We customize databases to handle high-volume transactions securely." 
+                   data-ar="بنية مالية قوية للرعاية الصحية. بدءاً من فواتير المرضى ومخازن الصيدليات إلى تقارير BI تحلل أرباح الأقسام. نقوم بتخصيص قواعد البيانات للتعامل مع العمليات الكثيفة بأمان تام.">
+                   Robust financial architecture built for healthcare. From patient billing and pharmacy inventory to deep BI reports analyzing department profitability. We customize databases to handle high-volume transactions securely.
+                </p>
+                <div class="img-container">
+                    <img src="hospital-app.jpg" alt="Hospital Dashboard" onerror="this.src='https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio">
+        <h2 class="section-title lang" data-en="Trusted by Industry Leaders" data-ar="عملاؤنا ومن تشرفنا بالتعاون معهم">Trusted by Industry Leaders</h2>
+        
+        <div class="filter-controls" id="filters">
+            <button class="filter-btn active lang" onclick="filterClients('all')" data-en="All" data-ar="الكل">All</button>
+            <button class="filter-btn lang" onclick="filterClients('finance')" data-en="Finance & Gov" data-ar="حكومي وبنوك">Finance & Gov</button>
+            <button class="filter-btn lang" onclick="filterClients('healthcare')" data-en="Healthcare" data-ar="القطاع الطبي">Healthcare</button>
+            <button class="filter-btn lang" onclick="filterClients('sports')" data-en="Sports & Clubs" data-ar="أندية رياضية">Sports & Clubs</button>
+            <button class="filter-btn lang" onclick="filterClients('education')" data-en="Education" data-ar="التعليم">Education</button>
+            <button class="filter-btn lang" onclick="filterClients('commercial')" data-en="Commercial & Apps" data-ar="تجاري وتطبيقات">Commercial & Apps</button>
+        </div>
+
+        <div class="clients-grid" id="clientsGrid"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div>
+                <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem; color: white; font-weight: 800;" class="lang" data-en="Connect With Us" data-ar="تواصل معنا">Connect With Us</h2>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> Sirconsult@xtra.co.com</p>
+                    <p><i class="fas fa-phone"></i> 0222608200 / 01103165060</p>
+                    <p><i class="fas fa-phone"></i> 01026669108 / 01101314849</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span class="lang" data-en="Obour Buildings – Salah Salem, Heliopolis, Bldg 19A, Cairo, Egypt" data-ar="عمارات العبور – صلاح سالم – مصر الجديدة – عمارة 19 أ - القاهرة">Obour Buildings – Salah Salem, Heliopolis, Bldg 19A, Cairo, Egypt</span></p>
+                    <p><i class="fas fa-globe"></i> xtra.co.com</p>
+                </div>
+            </div>
+            <div>
+                <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem; color: white; font-weight: 800;" class="lang" data-en="Our Competitive Edge" data-ar="مميزاتنا التنافسية">Our Competitive Edge</h2>
+                <ul style="color: var(--text-muted); list-style-position: inside; line-height: 2.2; font-size: 1.1rem;">
+                    <li class="lang" data-en="Continuous technical support" data-ar="دعم فني مستمر">Continuous technical support</li>
+                    <li class="lang" data-en="Free periodic updates" data-ar="تحديثات مجانية دورية">Free periodic updates</li>
+                    <li class="lang" data-en="Free financial & administrative consulting" data-ar="استشارات مالية وإدارية بدون مقابل إضافي">Free financial & administrative consulting</li>
+                    <li class="lang" data-en="Training accounting cadres" data-ar="تدريب الكوادر المحاسبية">Training accounting cadres</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Dynamics -->
+    <script>
+        let isArabic = false;
+        
+        const clientsData = [
+            { id: 1, category: 'finance', nameEn: 'The Egyptian Exchange (EGX)', nameAr: 'شركة البورصة المصرية القابضة', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 2, category: 'finance', nameEn: 'Egyptian Mercantile Exchange', nameAr: 'البورصة السلعية مصر', workEn: 'ERP Architecture', workAr: 'برنامج الحسابات' },
+            { id: 3, category: 'finance', nameEn: 'Taswyaat Clearing Services', nameAr: 'شركة تسويات لخدمات التقاص', workEn: 'ERP Architecture', workAr: 'برنامج الحسابات' },
+            { id: 4, category: 'sports', nameEn: 'El Modon Sports Services', nameAr: 'شركة المدن للخدمات الرياضية', workEn: 'ERP, E-Invoice & HR', workAr: 'الحسابات والفاتورة والأرشفة وشئون الموظفين' },
+            { id: 5, category: 'sports', nameEn: 'El Nady Sporting Club', nameAr: 'نادي النادي الرياضي', workEn: 'Membership Management', workAr: 'برنامج العضويات' },
+            { id: 6, category: 'healthcare', nameEn: 'Royal Lab (94 Branches)', nameAr: 'معامل رويال لاب', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 7, category: 'healthcare', nameEn: 'MediConsult', nameAr: 'شركة ميدي كونسلت', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 8, category: 'education', nameEn: 'Harmony / Salah El-Din Schools', nameAr: 'شركة هارموني للخدمات التعليمية', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 9, category: 'healthcare', nameEn: 'Nile Medical Group', nameAr: 'مجموعة النيل الطبية', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 10, category: 'healthcare', nameEn: 'Nile Labs', nameAr: 'معامل النيل', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 11, category: 'healthcare', nameEn: 'Trust Labs', nameAr: 'معامل ترست', workEn: 'ERP, HR & Archiving', workAr: 'برنامج الحسابات والفاتورة والأرشفة' },
+            { id: 12, category: 'healthcare', nameEn: 'Ajyal Genetics Labs', nameAr: 'معامل أجيال الوراثية', workEn: 'ERP, HR & Archiving', workAr: 'برنامج الحسابات والفاتورة والأرشفة وشئون الموظفين' },
+            { id: 13, category: 'commercial', nameEn: 'ESAA (Accountants Society)', nameAr: 'جمعية المحاسبين والمراجعين المصرية', workEn: 'Financial & Memberships', workAr: 'برنامج الحسابات والعضويات' },
+            { id: 14, category: 'sports', nameEn: 'Zamalek Sporting Club', nameAr: 'نادي الزمالك الرياضي', workEn: 'Financial ERP', workAr: 'برنامج الحسابات' },
+            { id: 15, category: 'healthcare', nameEn: 'Maryland Specialized Hospital', nameAr: 'مستشفى الميرلاند التخصصي', workEn: 'ERP & Operations', workAr: 'برنامج الحسابات والتشغيل' },
+            { id: 16, category: 'healthcare', nameEn: 'Samra Hospital', nameAr: 'مستشفى سمرا', workEn: 'ERP & Operations', workAr: 'برنامج الحسابات والتشغيل' },
+            { id: 17, category: 'healthcare', nameEn: 'New Care ICU', nameAr: 'مراكز نيو كير للرعاية', workEn: 'ERP & Operations', workAr: 'برنامج الحسابات والتشغيل' },
+            { id: 18, category: 'healthcare', nameEn: 'Dr. Abdulrahman Al-Ogaly Clinics', nameAr: 'مجموعة د.عبد الرحمن العقالي', workEn: 'ERP & Operations', workAr: 'برنامج الحسابات والتشغيل' },
+            { id: 19, category: 'commercial', nameEn: 'Montazah Tourism Investment', nameAr: 'شركة المنتزه للاستثمار السياحي', workEn: 'ERP & Operations', workAr: 'برنامج الحسابات والتشغيل' },
+            { id: 20, category: 'commercial', nameEn: 'Egyptian Int. Trade Co.', nameAr: 'الشركة المصرية العالمية للتجارة', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 21, category: 'commercial', nameEn: 'Int. Trade & Agencies', nameAr: 'الدولية للتجارة والتوكيلات', workEn: 'Financial ERP', workAr: 'برنامج الحسابات' },
+            { id: 22, category: 'healthcare', nameEn: 'Al-Fascope Center', nameAr: 'مركز الفاسكوب', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 23, category: 'commercial', nameEn: 'Saudi Tourism Investment', nameAr: 'السعودية للاستثمار السياحي', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 24, category: 'commercial', nameEn: 'Sanwan Group (12 Branches)', nameAr: 'مجموعة صنوان التجارية', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 25, category: 'healthcare', nameEn: 'Up Town Labs', nameAr: 'معامل اب تاون', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 26, category: 'commercial', nameEn: 'Raya Tourism', nameAr: 'شركة راية للسياحة', workEn: 'E-Invoice & E-Receipt', workAr: 'الفاتورة والايصال الالكتروني' },
+            { id: 27, category: 'commercial', nameEn: 'Oia Restaurants', nameAr: 'مطاعم اويا', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 28, category: 'commercial', nameEn: 'Lightella Factories', nameAr: 'مصانع لايتيلا', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 29, category: 'education', nameEn: 'Geel 2000 Schools', nameAr: 'مدارس جيل 2000', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 30, category: 'commercial', nameEn: 'Mobiphone', nameAr: 'شركة موبي فون', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 31, category: 'commercial', nameEn: 'Roaya Contracting', nameAr: 'شركة رؤية للمقاولات', workEn: 'Financial ERP', workAr: 'برنامج الحسابات' },
+            { id: 32, category: 'commercial', nameEn: 'El-Bob Clothing Factories', nameAr: 'مصانع البوب للملابس', workEn: 'Financial ERP', workAr: 'برنامج الحسابات' },
+            { id: 33, category: 'commercial', nameEn: 'Montazah Desalination', nameAr: 'شركة المنتزه للتحلية', workEn: 'ERP & Operations', workAr: 'برنامج الحسابات والتشغيل' },
+            { id: 34, category: 'commercial', nameEn: 'Nuit Perfumes', nameAr: 'نويت للعطور', workEn: 'ERP & E-Invoicing', workAr: 'برنامج الحسابات والفاتورة الالكترونية' },
+            { id: 35, category: 'sports', nameEn: 'Gym LA7', nameAr: 'جيم LA7', workEn: 'ERP & Memberships', workAr: 'برنامج الحسابات والعضويات' },
+            { id: 36, category: 'commercial', nameEn: 'Restaurant Application', nameAr: 'تطبيق إدارة المطاعم', workEn: 'POS, Recipe Tracking & E-Receipts', workAr: 'نقاط بيع، تتبع وصفات وإيصال إلكتروني' }
+        ];
+
+        function renderClients(filter = 'all') {
+            const grid = document.getElementById('clientsGrid');
+            grid.innerHTML = ''; 
+
+            const filteredClients = filter === 'all' ? clientsData : clientsData.filter(c => c.category === filter);
+
+            filteredClients.forEach((client, index) => {
+                const name = isArabic ? client.nameAr : client.nameEn;
+                const work = isArabic ? client.workAr : client.workEn;
+                
+                let catLabel = '';
+                if(client.category === 'finance') catLabel = isArabic ? 'حكومي وبنوك' : 'Finance & Gov';
+                if(client.category === 'healthcare') catLabel = isArabic ? 'قطاع طبي' : 'Healthcare';
+                if(client.category === 'sports') catLabel = isArabic ? 'أندية رياضية' : 'Sports & Clubs';
+                if(client.category === 'education') catLabel = isArabic ? 'تعليم' : 'Education';
+                if(client.category === 'commercial') catLabel = isArabic ? 'تجاري وتطبيقات' : 'Commercial & Apps';
+
+                const animDelay = index * 0.05;
+
+                const cardHTML = `
+                    <div class="client-card" style="animation: float 1s ease-out forwards; animation-delay: ${animDelay}s;">
+                        <span class="client-category">${catLabel}</span>
+                        <h3 class="client-name">${name}</h3>
+                        <p class="client-work"><i class="fas fa-check-circle"></i> ${work}</p>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+        }
+
+        function filterClients(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderClients(category);
+        }
+
+        function toggleLanguage() {
+            isArabic = !isArabic;
+            const elements = document.querySelectorAll('.lang');
+            const toggleBtn = document.getElementById('langToggle');
+
+            if (isArabic) {
+                document.body.classList.add('rtl');
+                toggleBtn.innerText = 'English';
+                elements.forEach(el => el.innerText = el.getAttribute('data-ar'));
+            } else {
+                document.body.classList.remove('rtl');
+                toggleBtn.innerText = 'العربية';
+                elements.forEach(el => el.innerText = el.getAttribute('data-en'));
+            }
+            
+            const activeFilterBtn = document.querySelector('.filter-btn.active');
+            const currentFilter = activeFilterBtn.getAttribute('onclick').match(/'([^']+)'/)[1];
+            renderClients(currentFilter);
+        }
+
+        renderClients('all');
+    </script>
+</body>
+</html>
