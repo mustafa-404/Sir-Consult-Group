@@ -116,6 +116,73 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
         }
+
+        /* ============================================
+           تحسين عرض الصور في المعرض (Gallery) - تم إضافته بواسطة المساعد
+           ============================================ */
+        .img-container { 
+            width: 100%; 
+            height: 180px; /* يمكنك تعديل الارتفاع حسب رغبتك */
+            border-radius: 12px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            background: #1e293b; 
+            transition: box-shadow 0.3s ease;
+        }
+        .img-container img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; /* قص الصورة بشكل متناسق دون تمدد */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: block;
+        }
+        .img-container:hover img { 
+            transform: scale(1.08); /* تكبير خفيف عند المرور */
+        }
+        .img-container:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            border-color: var(--accent);
+        }
+
+        /* بطاقات المعرض (Cards) */
+        .gallery-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 12px 12px 16px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+        .gallery-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        .gallery-card .img-container {
+            height: 150px; /* ارتفاع الصورة داخل البطاقة */
+            border-radius: 10px;
+        }
+        .gallery-card h4 {
+            color: var(--text-main);
+            margin: 12px 0 4px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .gallery-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0 4px;
+        }
+
+        /* تنسيق إضافي للصور في بطاقات الحلول الأخرى (مثل المستشفيات) */
+        .solution-img .img-container {
+            height: 200px;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
@@ -161,33 +228,6 @@
         </div>
     </section>
 
-    <!-- ... (Keep Statistics and About Section) ... -->
-
-    <!-- Xtra ERP Showcase -->
-    <section id="xtra">
-        <div class="xtra-box">
-            <div>
-                <!-- UPDATED HERE -->
-                <h2 style="font-size: 2.8rem; margin-bottom: 1rem; color: white; font-weight: 800;" class="lang" data-en="The Power of Xtra ERP" data-ar="قوة برنامج أكسترا">The Power of Xtra ERP</h2>
-                <p style="color: var(--gold); font-weight: 800; margin-bottom: 1.5rem; letter-spacing: 1.5px; display: inline-block; border: 1px solid var(--gold); padding: 0.3rem 1rem; border-radius: 20px;" class="lang" data-en="EXCLUSIVE AGENT FOR XTRA" data-ar="الوكيل الحصري لبرنامج أكسترا">EXCLUSIVE AGENT FOR XTRA</p>
-                <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; font-size: 1.1rem;" class="lang" data-en="As the exclusive agent for Xtra Accounting software in Egypt, we leverage its immense flexibility to deliver solutions tailored to every activity. Our vision integrates Xtra ERP with web portals, mobile apps, and AI-driven reporting." data-ar="بصفتنا الوكيل الحصري لبرنامج أكسترا للمحاسبة في مصر، نعتمد على مرونته الهائلة لتقديم حلول ملائمة لكل نشاط. رؤيتنا تشمل دمج أكسترا مع بوابات الويب، تطبيقات الموبايل، والذكاء الاصطناعي في التقارير.">As the exclusive agent for Xtra Accounting software in Egypt, we leverage its immense flexibility to deliver solutions tailored to every activity. Our vision integrates Xtra ERP with web portals, mobile apps, and AI-driven reporting.</p>
-                
-                <ul class="xtra-list" style="list-style: none;">
-                    <li><i class="fas fa-file-invoice-dollar"></i> <span class="lang" data-en="Seamless E-Invoicing & Tax Integration" data-ar="التكامل مع الفاتورة الإلكترونية ومنظومة الضرائب">Seamless E-Invoicing & Tax Integration</span></li>
-                    <li><i class="fas fa-chart-pie"></i> <span class="lang" data-en="Advanced BI Reports & AI Analytics" data-ar="تصميم تقارير BI وحلول ذكاء اصطناعي">Advanced BI Reports & AI Analytics</span></li>
-                    <li><i class="fas fa-folder-open"></i> <span class="lang" data-en="Document Cycles & Financial Consulting" data-ar="إعداد الدورات المستندية واستشارات مالية">Document Cycles & Financial Consulting</span></li>
-                </ul>
-            </div>
-            <!-- ... (Keep SVG Logo) ... -->
-        </div>
-    </section>
-
-    <!-- ... (Keep Industry Solutions, Portfolio, and Footer) ... -->
-    
-    <script>
-        // ... (Keep the existing JavaScript) ...
-    </script>
-
     <!-- About & Features Section -->
     <section id="about">
         <h2 class="section-title lang" data-en="Why Sir Consult?" data-ar="لماذا سير كونسلت؟">Why Sir Consult?</h2>
@@ -211,8 +251,6 @@
             </div>
         </div>
     </section>
-
-   
 
     <!-- Xtra ERP Showcase -->
     <section id="xtra">
@@ -245,29 +283,77 @@
         <h2 class="section-title lang" data-en="Tailored Industry Solutions" data-ar="حلول مخصصة للقطاعات">Tailored Industry Solutions</h2>
         <div class="grid-2">
             <!-- Restaurant App -->
-          <!-- Restaurant App Section -->
-<div class="glass-card">
-    <i class="fas fa-utensils card-icon"></i>
-    <h3 class="lang" data-en="Restaurant Management System" data-ar="تطبيق إدارة المطاعم">Restaurant Management System</h3>
-    <p class="lang" 
-       data-en="Dynamic POS and inventory modules seamlessly connected to Xtra ERP. Custom document cycles to track recipes, monitor multi-branch revenue, and instantly sync with the tax e-receipt system." 
-       data-ar="نقاط بيع (POS) ونظام مخازن متصل مباشرة ببرنامج أكسترا. إعداد الدورات المستندية لتتبع الوصفات، متابعة إيرادات الفروع، والتكامل الفوري مع منظومة الإيصال الإلكتروني للضرائب.">
-       Dynamic POS and inventory modules seamlessly connected to Xtra ERP.
-    </p>
+            <div class="glass-card">
+                <i class="fas fa-utensils card-icon"></i>
+                <h3 class="lang" data-en="Restaurant Management System" data-ar="نظام إدارة المطاعم">نظام إدارة المطاعم</h3>
+                <p class="lang" 
+                   data-en="Dynamic POS and inventory modules seamlessly connected to Xtra ERP. Custom document cycles to track recipes, monitor multi-branch revenue, and instantly sync with the tax e-receipt system." 
+                   data-ar="نقاط بيع (POS) ونظام مخازن متصل مباشرة ببرنامج أكسترا. إعداد الدورات المستندية لتتبع الوصفات، متابعة إيرادات الفروع، والتكامل الفوري مع منظومة الإيصال الإلكتروني للضرائب.">
+                   نقاط بيع (POS) ونظام مخازن متصل مباشرة ببرنامج أكسترا. إعداد الدورات المستندية لتتبع الوصفات، متابعة إيرادات الفروع، والتكامل الفوري مع منظومة الإيصال الإلكتروني للضرائب.
+                </p>
 
-    <!-- Gallery of System Screenshots -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin-top: 20px;">
-    <div class="img-container"><img src="POS_System.jpg" alt="POS System"></div>
-    <div class="img-container"><img src="Order_Screen.jpg" alt="Order Screen"></div>
-    <div class="img-container"><img src="Kitchen_Screen.jpg" alt="Kitchen Screen"></div>
-    <div class="img-container"><img src="Waiter_Screen.jpg" alt="Waiter Screen"></div>
-    <div class="img-container"><img src="Map_of_Tables.jpg" alt="Map of Tables"></div>
-    <div class="img-container"><img src="Cashier_screen_1.jpg" alt="Cashier Screen"></div>
-    <div class="img-container"><img src="Login_Screen.jpg" alt="Login Screen"></div>
-</div>
-</div>
-    </div>
-</div>
+                <!-- معرض بطاقات المطاعم (مستخدم الكلاسات الجديدة) -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px;">
+                    
+                    <div class="gallery-card">
+                        <div class="img-container">
+                            <img src="POS_System.jpg" alt="POS System" onerror="this.src='https://source.unsplash.com/400x300/?pos-system'">
+                        </div>
+                        <h4>نظام نقاط البيع</h4>
+                        <p>فواتير الكاشير والبحث</p>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="img-container">
+                            <img src="Order_Screen.jpg" alt="Order Screen" onerror="this.src='https://source.unsplash.com/400x300/?restaurant-order'">
+                        </div>
+                        <h4>شاشة الطلب XTRA</h4>
+                        <p>إرسال، حجز، إجمالي</p>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="img-container">
+                            <img src="Kitchen_Screen.jpg" alt="Kitchen Screen" onerror="this.src='https://source.unsplash.com/400x300/?kitchen'">
+                        </div>
+                        <h4>شاشة التحضير</h4>
+                        <p>الطاولات المفتوحة</p>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="img-container">
+                            <img src="Waiter_Screen.jpg" alt="Waiter Screen" onerror="this.src='https://source.unsplash.com/400x300/?waiter'">
+                        </div>
+                        <h4>شاشة النادل</h4>
+                        <p>إدارة الطلبات</p>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="img-container">
+                            <img src="Map_of_Tables.jpg" alt="Map of Tables" onerror="this.src='https://source.unsplash.com/400x300/?table'">
+                        </div>
+                        <h4>خريطة الصالة</h4>
+                        <p>عرض حي للطاولات</p>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="img-container">
+                            <img src="Cashier_screen_1.jpg" alt="Cashier Screen" onerror="this.src='https://source.unsplash.com/400x300/?cashier'">
+                        </div>
+                        <h4>شاشة الكاشير</h4>
+                        <p>جلسات الطاولات النشطة</p>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="img-container">
+                            <img src="Login_Screen.jpg" alt="Login Screen" onerror="this.src='https://source.unsplash.com/400x300/?login'">
+                        </div>
+                        <h4>تسجيل الدخول</h4>
+                        <p>قاعدة البيانات، waiter</p>
+                    </div>
+
+                </div>
+            </div>
+
             <!-- Hospital App -->
             <div class="glass-card">
                 <i class="fas fa-hospital card-icon"></i>
@@ -277,8 +363,11 @@
                    data-ar="بنية مالية قوية للرعاية الصحية. بدءاً من فواتير المرضى ومخازن الصيدليات إلى تقارير BI تحلل أرباح الأقسام. نقوم بتخصيص قواعد البيانات للتعامل مع العمليات الكثيفة بأمان تام.">
                    Robust financial architecture built for healthcare. From patient billing and pharmacy inventory to deep BI reports analyzing department profitability. We customize databases to handle high-volume transactions securely.
                 </p>
-                <div class="img-container">
-                    <img src="hospital-app.jpg" alt="Hospital Dashboard" onerror="this.src='https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800'">
+                <!-- مثال لاستخدام .img-container في قسم المستشفيات -->
+                <div class="solution-img">
+                    <div class="img-container">
+                        <img src="hospital-app.jpg" alt="Hospital Dashboard" onerror="this.src='https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800'">
+                    </div>
                 </div>
             </div>
         </div>
